@@ -19,6 +19,10 @@ import main from './'
 import log = console.log
 import type { Foo, Bar } from 'foo'
 import userEvent from '@testing-library/user-event'
+import { foo, type bar } from '@/my/module'
+import * as R from 'remeda'
+import * as utils from '~/utils'
+import {} from '#import'
 ",
         JsFileSource::ts(),
     )
