@@ -3,7 +3,8 @@
 ✨ A fast and opinionated imports organizer for ECMAScript and TypeScript.
 
 > [!WARNING]
-> This project is in alpha stage. Do not use in production. 
+> This project is in alpha stage. Production use is not recommended.
+> If you find some bugs, please feel free to report to [Issues](https://github.com/siketyan/tsimports/issues).
 
 
 ## Installation
@@ -13,7 +14,7 @@ npm install -g @tsimports/tsimports
 ```
 
 > [!TIP]
-> If you want to manage the version of tsimports, use `-D` instead of `-g`.
+> If you want to share the version of tsimports in the project, use `-D` instead of `-g`.
 
 
 ## Usage
@@ -81,7 +82,7 @@ tsimports collects all imports at the top of the file.
 Any other statements are retained at the position and tsimports doesn't modify anything about them.
 
 
-# Acknowledgements
+## Acknowledgements
 
 tsimports is built on top of the [Biome](https://github.com/biomejs/biome) infrastructure, including the JS syntax, parser, and other utils.
 If you like tsimports, please consider also supporting the Biome project.
