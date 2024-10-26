@@ -31,17 +31,17 @@ importers:
   packages/@tsimports/tsimports:
     optionalDependencies:
       '@tsimports/cli-darwin-arm64':
-        specifier: 0.1.2
-        version: 0.1.2
+        specifier: 0.1.3
+        version: 0.1.3
       '@tsimports/cli-darwin-x64':
-        specifier: 0.1.2
-        version: 0.1.2
+        specifier: 0.1.3
+        version: 0.1.3
       '@tsimports/cli-linux-arm64':
-        specifier: 0.1.2
-        version: 0.1.2
+        specifier: 0.1.3
+        version: 0.1.3
       '@tsimports/cli-linux-x64':
-        specifier: 0.1.2
-        version: 0.1.2
+        specifier: 0.1.3
+        version: 0.1.3
 
 packages:
 
@@ -98,26 +98,26 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@tsimports/cli-darwin-arm64@0.1.2':
-    resolution: {integrity: sha512-pWOiKJfRa6uj/rfesMZ+krdNSDm2o7CsBpQiDgqtlneaikzeGivyoGf9jXLVxLM2kqpEZ/F2iKJSydV40V1YFQ==}
+  '@tsimports/cli-darwin-arm64@0.1.3':
+    resolution: {integrity: sha512-XOVQfhGNWdTlzGrIJJXkEybYTMx9JXyw4GeLtaY4/aUoSKmq7KUaJRbyvROTXFuV+76z9UbObzRtIp4hvE3KTg==}
     engines: {node: '>=18'}
     cpu: [arm64]
     os: [darwin]
 
-  '@tsimports/cli-darwin-x64@0.1.2':
-    resolution: {integrity: sha512-Ig1lDRuaejB9wnh0wxJ04Gb4kesgImuGuKFEcd8GyKdE2EXx9nWMsRiW0OzA+OHn8y7QNAl3Gf+nd7S43mxy5g==}
+  '@tsimports/cli-darwin-x64@0.1.3':
+    resolution: {integrity: sha512-67l/kfdWX4ca3v4nqq4x+kXy9sadE53X5kQ+TKGKodFhkw7kSu0xKmmZpdYMvHzdTdVhyFjHR7ZZenAvEVil6w==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [darwin]
 
-  '@tsimports/cli-linux-arm64@0.1.2':
-    resolution: {integrity: sha512-93+13vfc/U3SNGVGwZPksi1Er2/eEPkO8n/WPwkPhRNYiVKpD2qGIiXAdiFoN83VoEimJ/DXyiJgcfuP3xuaTQ==}
+  '@tsimports/cli-linux-arm64@0.1.3':
+    resolution: {integrity: sha512-eWh0KbhID3oWjQvg9sbwTa1P7ZOCSaKjPhd3ydm/BH8mR9a6oJuXtP1EVMbSyu5BB2D3eYxJJ0ipEW/RzcdLWw==}
     engines: {node: '>=18'}
     cpu: [arm64]
     os: [linux]
 
-  '@tsimports/cli-linux-x64@0.1.2':
-    resolution: {integrity: sha512-BHoFO+JY/tMxWBeF/oxa9Onv35scuVOEerfaEu6K91j7MO2C5lMqhzLWBt1uCNsGdh5JK2yp5cI4OP3AyQI/9A==}
+  '@tsimports/cli-linux-x64@0.1.3':
+    resolution: {integrity: sha512-2bJPAuBrCOCo5EifokA7bJC9vXZ/BjFOSHFYzWKiUYYALJXUS83l8+ZgDTsruOmABAEuQb4OMfNmtZySa2WtNQ==}
     engines: {node: '>=18'}
     cpu: [x64]
     os: [linux]
@@ -159,14 +159,14 @@ snapshots:
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
 
-  '@tsimports/cli-darwin-arm64@0.1.2':
+  '@tsimports/cli-darwin-arm64@0.1.3':
     optional: true
 
-  '@tsimports/cli-darwin-x64@0.1.2':
+  '@tsimports/cli-darwin-x64@0.1.3':
     optional: true
 
-  '@tsimports/cli-linux-arm64@0.1.2':
+  '@tsimports/cli-linux-arm64@0.1.3':
     optional: true
 
-  '@tsimports/cli-linux-x64@0.1.2':
+  '@tsimports/cli-linux-x64@0.1.3':
     optional: true

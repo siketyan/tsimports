@@ -54,6 +54,16 @@ fn run(console: &mut impl Console) -> Result<()> {
             }
         }
     } else {
+        if args.language.is_none() {
+            console.println(LogLevel::Error, markup! {
+                <Warn>
+                    "\u{26a0} Input language is not specified, assuming as an ECMAScript module. Use "
+                    <Emphasis>"--language <js|jsx|ts|tsx>"</Emphasis>
+                    " option to override."
+                </Warn>
+            });
+        }
+
         run_single(Input::Stdin, &args, console)?;
     }
 
@@ -96,14 +106,6 @@ fn run_single(input: Input, args: &Args, console: &mut impl Console) -> Result<(
             TS => JsFileSource::ts(),
             TSX => JsFileSource::tsx(),
         }
-    } else {
-        console.println(LogLevel::Error, markup! {
-        <Warn>
-            "\u{26a0} Input language is not specified, assuming as an ECMAScript module. Use "
-            <Emphasis>"--language <js|jsx|ts|tsx>"</Emphasis>
-            " option to override."
-        </Warn>
-    });
     };
 
     let output = match tsimports(buf.as_str(), source) {
