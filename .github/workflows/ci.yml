@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+env:
+  CARGO_TERM_COLOR: always
+
+permissions:
+  checks: write
+  contents: read
+
+jobs:
+  checks:
+    strategy:
+      matrix:
+        os:
+          - windows-2022
+          - macos-13
+          - macos-14
+          - ubuntu-22.04
+          - ubuntu-24.04
+    name: Checks
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-v1-${{ hashFiles('**/Cargo.lock') }}
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt,clippy
+
+      - name: Run clippy
+        uses: giraffate/clippy-action@v1
+        with:
+          clippy_flags: -- -Dwarnings
+          reporter: github-pr-check
+          fail_on_error: true
+
+      - name: Run rustfmt
+        run: cargo fmt --all --check
+
+      - name: Run tests
+        run: cargo test
