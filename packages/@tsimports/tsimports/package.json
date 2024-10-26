@@ -1,6 +1,6 @@
 {
   "name": "@tsimports/tsimports",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A fast and opinionated imports organizer for ECMAScript and TypeScript.",
   "author": "Naoki Ikeguchi <me@s6n.jp>",
   "license": "MIT",
@@ -22,10 +22,10 @@
     "tsimports": "bin/tsimports"
   },
   "optionalDependencies": {
-    "@tsimports/cli-darwin-arm64": "0.1.3",
-    "@tsimports/cli-darwin-x64": "0.1.3",
-    "@tsimports/cli-linux-arm64": "0.1.3",
-    "@tsimports/cli-linux-x64": "0.1.3"
+    "@tsimports/cli-darwin-arm64": "0.1.4",
+    "@tsimports/cli-darwin-x64": "0.1.4",
+    "@tsimports/cli-linux-arm64": "0.1.4",
+    "@tsimports/cli-linux-x64": "0.1.4"
   },
   "scripts": {
     "postinstall": "node scripts/postinstall.js"
