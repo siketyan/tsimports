@@ -17,7 +17,7 @@ import bar from './bar'
 import baz from './bar/baz'
 import main from './'
 import log = console.log
-import type { Foo } from 'foo'
+import type { Foo, Bar } from 'foo'
 ",
         JsFileSource::ts(),
     )

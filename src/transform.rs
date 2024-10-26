@@ -193,20 +193,28 @@ impl Remake for JsShorthandNamedImportSpecifier {
     }
 }
 
+impl Remake for AnyJsNamedImportSpecifier {
+    fn remake(&self) -> SyntaxResult<Self> {
+        match self {
+            Self::JsBogusNamedImportSpecifier(_) => todo!(),
+            Self::JsNamedImportSpecifier(specifier) => Ok(specifier.remake()?.into()),
+            Self::JsShorthandNamedImportSpecifier(specifier) => Ok(specifier.remake()?.into()),
+        }
+    }
+}
+
 impl Remake for JsNamedImportSpecifierList {
     fn remake(&self) -> SyntaxResult<Self> {
         Ok(make::js_named_import_specifier_list(
-            self.iter()
-                .map(|specifier| match specifier? {
-                    AnyJsNamedImportSpecifier::JsBogusNamedImportSpecifier(_) => todo!(),
-                    AnyJsNamedImportSpecifier::JsNamedImportSpecifier(specifier) => {
-                        Ok(specifier.remake()?.into())
-                    }
-                    AnyJsNamedImportSpecifier::JsShorthandNamedImportSpecifier(specifier) => {
-                        Ok(specifier.remake()?.into())
-                    }
-                })
-                .collect::<Result<Vec<_>, _>>()?,
+            {
+                let mut items = self
+                    .iter()
+                    .map(|specifier| specifier?.remake())
+                    .collect::<Result<Vec<_>, _>>()?;
+
+                items.sort_by_key(|item| item.imported_name().unwrap().text_trimmed().to_string());
+                items
+            },
             self.separators()
                 .map(|_| make_token_with_r_space(JsSyntaxKind::COMMA))
                 .collect::<Vec<_>>(),
