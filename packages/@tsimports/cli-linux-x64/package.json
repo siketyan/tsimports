@@ -1,0 +1,19 @@
+{
+  "name": "@tsimports/cli-linux-x64",
+  "version": "0.1.1",
+  "author": "Naoki Ikeguchi <me@s6n.jp>",
+  "license": "MIT",
+  "homepage": "https://github.com/siketyan/tsimports",
+  "bugs": "https://github.com/siketyan/tsimports/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siketyan/tsimports.git",
+    "directory": "packages/@tsimports/cli-linux-x64"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "os": ["linux"],
+  "cpu": ["x64"],
+  "libc": ["glibc"]
+}

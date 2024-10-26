@@ -1,0 +1,4 @@
+[submodule "biome"]
+	path = biome
+	url = https://github.com/biomejs/biome.git
+	branch = main

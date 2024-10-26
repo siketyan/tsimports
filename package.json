@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "@tsimports/root",
+  "version": "0.1.1",
+  "description": "Workspace root of the project.",
+  "author": "Naoki Ikeguchi <me@s6n.jp>",
+  "license": "MIT",
+  "packageManager": "pnpm@9.12.2",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  },
+  "scripts": {
+    "check": "biome check",
+    "fix": "biome check --fix"
+  }
+}

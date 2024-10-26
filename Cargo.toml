@@ -1,0 +1,27 @@
+[package]
+name = "tsimports"
+description = "A fast and opinionated imports organizer for ECMAScript and TypeScript."
+version = "0.1.1"
+rust-version = "1.81.0"
+edition = "2021"
+authors = ["Naoki Ikeguchi <me@s6n.jp>"]
+license = "MIT"
+license-file = "LICENCE.md"
+readme = "README.md"
+
+[dependencies]
+biome_console = { path = "./biome/crates/biome_console" }
+biome_diagnostics = { path = "./biome/crates/biome_diagnostics" }
+biome_js_factory = { path = "./biome/crates/biome_js_factory" }
+biome_js_parser = { path = "./biome/crates/biome_js_parser" }
+biome_js_syntax = { path = "./biome/crates/biome_js_syntax" }
+biome_parser = { path = "./biome/crates/biome_parser" }
+biome_rowan = { path = "./biome/crates/biome_rowan" }
+
+anyhow = "1.0"
+clap = { version = "4.5", features = ["derive"] }
+itertools = "0.13.0"
+thiserror = "1.0"
+
+[dev-dependencies]
+insta = "1.40"

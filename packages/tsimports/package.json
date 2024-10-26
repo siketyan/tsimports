@@ -1,0 +1,33 @@
+{
+  "name": "tsimports",
+  "version": "0.1.1",
+  "description": "A fast and opinionated imports organizer for ECMAScript and TypeScript.",
+  "author": "Naoki Ikeguchi <me@s6n.jp>",
+  "license": "MIT",
+  "homepage": "https://github.com/siketyan/tsimports",
+  "bugs": "https://github.com/siketyan/tsimports/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siketyan/tsimports.git",
+    "directory": "packages/tsimports"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": ["bin/tsimports", "scripts/postinstall.js", "README.md", "LICENCE.md"],
+  "bin": {
+    "tsimports": "bin/tsimports"
+  },
+  "optionalDependencies": {
+    "@tsimports/cli-darwin-arm64": "0.1.1",
+    "@tsimports/cli-darwin-x64": "0.1.1",
+    "@tsimports/cli-linux-arm64": "0.1.1",
+    "@tsimports/cli-linux-x64": "0.1.1"
+  },
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  }
+}

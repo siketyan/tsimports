@@ -1,0 +1,16 @@
+{
+  "name": "@tsimports/cli-darwin-x64",
+  "version": "0.1.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siketyan/tsimports.git",
+    "directory": "packages/tsimports"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "homepage": "https://github.com/siketyan/tsimports",
+  "os": ["darwin"],
+  "cpu": ["x64"]
+}
