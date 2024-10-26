@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tsimports/root",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Workspace root of the project.",
   "author": "Naoki Ikeguchi <me@s6n.jp>",
   "license": "MIT",
