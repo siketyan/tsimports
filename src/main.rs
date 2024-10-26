@@ -1,6 +1,6 @@
 use std::fs::{read_to_string, write};
 use std::io::{stdin, Read};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use anyhow::{anyhow, Result};
 use biome_console::{markup, ColorMode, Console, EnvConsole, LogLevel};
@@ -9,6 +9,7 @@ use biome_js_syntax::JsFileSource;
 use clap::{Parser, ValueEnum};
 use glob::glob;
 use tsimports::{tsimports, Error};
+use walkdir::WalkDir;
 
 #[derive(Copy, Clone, Debug, Default, ValueEnum)]
 enum Language {
@@ -17,6 +18,31 @@ enum Language {
     JSX,
     TS,
     TSX,
+}
+
+impl Language {
+    fn from_extension(ext: &str) -> Option<Self> {
+        match ext {
+            "js" | "mjs" => Some(Self::JS),
+            "jsx" => Some(Self::JSX),
+            "ts" | "cts" | "mts" => Some(Self::TS),
+            "tsx" => Some(Self::TSX),
+            _ => None,
+        }
+    }
+
+    fn from_path(path: impl AsRef<Path>) -> Option<Self> {
+        Self::from_extension(path.as_ref().extension().and_then(|ext| ext.to_str())?)
+    }
+
+    fn to_file_source(&self) -> JsFileSource {
+        match self {
+            Self::JS => JsFileSource::js_module(),
+            Self::JSX => JsFileSource::jsx(),
+            Self::TS => JsFileSource::ts(),
+            Self::TSX => JsFileSource::tsx(),
+        }
+    }
 }
 
 #[derive(Debug, Parser)]
@@ -50,7 +76,27 @@ fn run(console: &mut impl Console) -> Result<()> {
     if let Some(paths) = &args.paths {
         for path in paths.iter() {
             for entry in glob(path)? {
-                run_single(Input::File(entry?), &args, console)?;
+                let entry = entry?;
+                if entry.is_dir() {
+                    WalkDir::new(entry)
+                        .into_iter()
+                        .filter_map(|e| e.ok())
+                        .filter_map(|e| {
+                            let path = e.path().to_path_buf();
+                            match Language::from_path(&path) {
+                                Some(lang) => Some((path, lang)),
+                                _ => None,
+                            }
+                        })
+                        .map(|(path, lang)| {
+                            run_single(Input::File(path, Some(lang)), &args, console)
+                        })
+                        .collect::<Result<()>>()?;
+                } else {
+                    let lang = Language::from_path(&entry);
+
+                    run_single(Input::File(entry, lang), &args, console)?;
+                }
             }
         }
     } else {
@@ -71,21 +117,16 @@ fn run(console: &mut impl Console) -> Result<()> {
 }
 
 enum Input {
-    File(PathBuf),
+    File(PathBuf, Option<Language>),
     Stdin,
 }
 
 fn run_single(input: Input, args: &Args, console: &mut impl Console) -> Result<()> {
     let mut source = JsFileSource::js_module();
     let buf = match &input {
-        Input::File(path) => {
-            if let Some(ext) = path.extension().and_then(|ext| ext.to_str()) {
-                match ext {
-                    "jsx" => source = JsFileSource::jsx(),
-                    "ts" => source = JsFileSource::ts(),
-                    "tsx" => source = JsFileSource::tsx(),
-                    _ => {}
-                }
+        Input::File(path, lang) => {
+            if let Some(lang) = lang {
+                source = lang.to_file_source();
             }
 
             read_to_string(path)?
@@ -98,15 +139,8 @@ fn run_single(input: Input, args: &Args, console: &mut impl Console) -> Result<(
     };
 
     if let Some(lang) = args.language {
-        use Language::*;
-
-        source = match lang {
-            JS => JsFileSource::js_module(),
-            JSX => JsFileSource::jsx(),
-            TS => JsFileSource::ts(),
-            TSX => JsFileSource::tsx(),
-        }
-    };
+        source = lang.to_file_source();
+    }
 
     let output = match tsimports(buf.as_str(), source) {
         Ok(o) => o,
@@ -126,7 +160,7 @@ fn run_single(input: Input, args: &Args, console: &mut impl Console) -> Result<(
     };
 
     if args.write {
-        let Input::File(path) = input else {
+        let Input::File(path, _) = input else {
             return Err(anyhow!(
                 "Can't write the result as the input was from the standard input."
             ));
