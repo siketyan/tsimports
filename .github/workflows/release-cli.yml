@@ -25,7 +25,7 @@ jobs:
         id: version
         with:
           diff-search: true
-          file-name: packages/tsimports/package.json
+          file-name: packages/@tsimports/tsimports/package.json
 
       - name: Set version name
         if: steps.version.outputs.changed == 'true'
@@ -34,6 +34,7 @@ jobs:
           echo "version=${{ steps.version.outputs.version }}" >> $GITHUB_ENV
 
   build:
+    needs: check
     strategy:
       matrix:
         include:
