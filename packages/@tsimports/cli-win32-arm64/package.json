@@ -1,6 +1,6 @@
 {
   "name": "@tsimports/cli-win32-arm64",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Naoki Ikeguchi <me@s6n.jp>",
   "license": "MIT",
   "homepage": "https://github.com/siketyan/tsimports",

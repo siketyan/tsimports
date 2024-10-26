@@ -1,7 +1,7 @@
 [package]
 name = "tsimports"
 description = "A fast and opinionated imports organizer for ECMAScript and TypeScript."
-version = "0.1.2"
+version = "0.1.3"
 rust-version = "1.81.0"
 edition = "2021"
 authors = ["Naoki Ikeguchi <me@s6n.jp>"]
