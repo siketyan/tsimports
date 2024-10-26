@@ -86,10 +86,21 @@ impl ImportKind {
             return Self::Parent;
         }
 
-        if let Some(char) = name.chars().next() {
+        let mut chars = name.chars();
+        loop {
+            let Some(char) = chars.next() else {
+                break;
+            };
+
+            if char == '@' {
+                continue;
+            }
+
             if char.is_ascii_alphabetic() {
                 return Self::External;
             }
+
+            break;
         }
 
         Self::Internal

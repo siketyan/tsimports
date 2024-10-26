@@ -18,6 +18,7 @@ import baz from './bar/baz'
 import main from './'
 import log = console.log
 import type { Foo, Bar } from 'foo'
+import userEvent from '@testing-library/user-event'
 ",
         JsFileSource::ts(),
     )
