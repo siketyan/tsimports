@@ -38,24 +38,24 @@ jobs:
     strategy:
       matrix:
         include:
-#          - os: windows-2022
-#            target: x86_64-pc-windows-msvc
-#            code-target: win32-x64
-#          - os: windows-2022
-#            target: aarch64-pc-windows-msvc
-#            code-target: win32-arm64
+          - os: windows-2022
+            target: x86_64-pc-windows-msvc
+            code-target: win32-x64
+          - os: windows-2022
+            target: aarch64-pc-windows-msvc
+            code-target: win32-arm64
           - os: ubuntu-24.04
             target: x86_64-unknown-linux-gnu
             code-target: linux-x64
           - os: ubuntu-24.04
             target: aarch64-unknown-linux-gnu
             code-target: linux-arm64
-#          - os: ubuntu-24.04
-#            target: x86_64-unknown-linux-musl
-#            code-target: linux-x64-musl
-#          - os: ubuntu-24.04
-#            target: aarch64-unknown-linux-musl
-#            code-target: linux-arm64-musl
+          - os: ubuntu-24.04
+            target: x86_64-unknown-linux-musl
+            code-target: linux-x64-musl
+          - os: ubuntu-24.04
+            target: aarch64-unknown-linux-musl
+            code-target: linux-arm64-musl
           - os: macos-14
             target: x86_64-apple-darwin
             code-target: darwin-x64
@@ -89,11 +89,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu
 
-#      - name: Install musl toolchain
-#        if: matrix.code-target == 'linux-x64-musl' || matrix.code-target == 'linux-arm64-musl'
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y musl-tools
+      - name: Install musl toolchain
+        if: matrix.code-target == 'linux-x64-musl' || matrix.code-target == 'linux-arm64-musl'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y musl-tools
 
 #      - name: Audit crates.io dependencies
 #        if: matrix.code-target == 'linux-x64'
@@ -114,11 +114,11 @@ jobs:
           RUSTFLAGS: "-C strip=symbols"
 
       # Copy the CLI binary and rename it to include the name of the target platform
-#      - name: Copy CLI binary
-#        if: matrix.os == 'windows-2022'
-#        run: |
-#          mkdir dist
-#          cp target/${{ matrix.target }}/release/tsimports.exe ./dist/tsimports-${{ matrix.code-target }}.exe
+      - name: Copy CLI binary
+        if: matrix.os == 'windows-2022'
+        run: |
+          mkdir dist
+          cp target/${{ matrix.target }}/release/tsimports.exe ./dist/tsimports-${{ matrix.code-target }}.exe
 
       - name: Copy CLI binary
         if: matrix.os != 'windows-2022'

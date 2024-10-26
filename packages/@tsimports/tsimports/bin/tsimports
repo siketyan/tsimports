@@ -1,11 +1,27 @@
 #!/usr/bin/env node
 const { platform, arch, env, version, release } = process;
+const { execSync } = require("child_process");
+
+function isMusl() {
+  let stderr;
+  try {
+    stderr = execSync("ldd --version", {
+      stdio: ["pipe", "pipe", "pipe"],
+    });
+  } catch (err) {
+    stderr = err.stderr;
+  }
+  if (stderr.indexOf("musl") > -1) {
+    return true;
+  }
+  return false;
+}
 
 const PLATFORMS = {
-	// win32: {
-	// 	x64: "@tsimports/cli-win32-x64/tsimports.exe",
-	// 	arm64: "@tsimports/cli-win32-arm64/tsimports.exe",
-	// },
+	win32: {
+		x64: "@tsimports/cli-win32-x64/tsimports.exe",
+		arm64: "@tsimports/cli-win32-arm64/tsimports.exe",
+	},
 	darwin: {
 		x64: "@tsimports/cli-darwin-x64/tsimports",
 		arm64: "@tsimports/cli-darwin-arm64/tsimports",
@@ -14,13 +30,18 @@ const PLATFORMS = {
 		x64: "@tsimports/cli-linux-x64/tsimports",
 		arm64: "@tsimports/cli-linux-arm64/tsimports",
 	},
-	// "linux-musl": {
-	// 	x64: "@tsimports/cli-linux-x64-musl/tsimports",
-	// 	arm64: "@tsimports/cli-linux-arm64-musl/tsimports",
-	// },
+	"linux-musl": {
+		x64: "@tsimports/cli-linux-x64-musl/tsimports",
+		arm64: "@tsimports/cli-linux-arm64-musl/tsimports",
+	},
 };
 
-const binPath = PLATFORMS?.[platform]?.[arch];
+const binPath = env.TSIMPORTS_BINARY ||
+  (platform === "linux" && isMusl()
+      ? PLATFORMS?.["linux-musl"]?.[arch]
+      : PLATFORMS?.[platform]?.[arch]
+  );
+
 if (binPath) {
 	const packageManager = detectPackageManager();
 	const result = require("child_process").spawnSync(

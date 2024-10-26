@@ -1,5 +1,5 @@
 {
-  "name": "@tsimports/cli-darwin-x64",
+  "name": "@tsimports/cli-linux-musl-arm64",
   "version": "0.1.2",
   "author": "Naoki Ikeguchi <me@s6n.jp>",
   "license": "MIT",
@@ -8,11 +8,12 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/siketyan/tsimports.git",
-    "directory": "packages/@tsimports/cli-darwin-x64"
+    "directory": "packages/@tsimports/cli-linux-musl-arm64"
   },
   "engines": {
     "node": ">=18"
   },
-  "os": ["darwin"],
-  "cpu": ["x64"]
+  "os": ["linux"],
+  "cpu": ["arm64"],
+  "libc": ["musl"]
 }
