@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - packages/tsimports/package.json
+      - packages/@tsimports/tsimports/package.json
 
 jobs:
   check:
@@ -158,7 +158,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Generate npm packages
-        run: node packages/tsimports/scripts/generate-packages.mjs
+        run: node packages/@tsimports/tsimports/scripts/generate-packages.mjs
 
       - name: Publish npm packages as latest
         if: needs.build.outputs.prerelease != 'true'

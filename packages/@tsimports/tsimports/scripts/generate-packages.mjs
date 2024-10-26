@@ -5,7 +5,7 @@ import { format } from "node:util";
 
 const CLI_ROOT = resolve(fileURLToPath(import.meta.url), "../..");
 const PACKAGES_ROOT = resolve(CLI_ROOT, "..");
-const REPO_ROOT = resolve(PACKAGES_ROOT, "..");
+const REPO_ROOT = resolve(PACKAGES_ROOT, "../..");
 const MANIFEST_PATH = resolve(CLI_ROOT, "package.json");
 
 const rootManifest = JSON.parse(fs.readFileSync(MANIFEST_PATH).toString("utf-8"));
@@ -17,7 +17,7 @@ function getName(platform, arch, prefix = "cli") {
 function copyBinaryToNativePackage(platform, arch) {
   const os = platform.split("-")[0];
   const buildName = getName(platform, arch);
-  const packageRoot = resolve(PACKAGES_ROOT, "@tsimports", buildName);
+  const packageRoot = resolve(PACKAGES_ROOT, buildName);
   const packageName = `@tsimports/${buildName}`;
 
   // Update the package.json manifest

@@ -1,5 +1,5 @@
 {
-  "name": "tsimports",
+  "name": "@tsimports/tsimports",
   "version": "0.1.2",
   "description": "A fast and opinionated imports organizer for ECMAScript and TypeScript.",
   "author": "Naoki Ikeguchi <me@s6n.jp>",

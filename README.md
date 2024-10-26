@@ -9,7 +9,7 @@
 ## Installation
 
 ```shell
-npm install -g tsimports
+npm install -g @tsimports/tsimports
 ```
 
 > [!TIP]
