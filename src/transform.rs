@@ -288,10 +288,12 @@ impl Remake for JsImport {
             AnyJsImportClause::JsImportNamespaceClause(clause) => clause.remake()?.into(),
         };
 
-        Ok(
-            make::js_import(make_token_with_r_space(JsSyntaxKind::IMPORT_KW), clause)
-                .with_semicolon_token(make::token(JsSyntaxKind::SEMICOLON))
-                .build(),
-        )
+        let mut builder = make::js_import(make_token_with_r_space(JsSyntaxKind::IMPORT_KW), clause);
+
+        if self.semicolon_token().is_some() {
+            builder = builder.with_semicolon_token(make::token(JsSyntaxKind::SEMICOLON));
+        }
+
+        Ok(builder.build())
     }
 }

@@ -2,26 +2,26 @@
 source: tests/test.rs
 expression: "tsimports(\"\\\nimport fs from 'fs'\nimport path from 'path'\nimport _ from 'lodash'\nimport chalk from 'chalk'\nimport foo from 'src/foo'\nimport foo from '../foo'\nimport qux from '../../foo/qux'\nimport bar from './bar'\nimport baz from './bar/baz'\nimport main from './'\nimport log = console.log\nimport type { Foo, Bar } from 'foo'\nimport userEvent from '@testing-library/user-event'\nimport { foo, type bar } from '@/my/module'\nimport * as R from 'remeda'\nimport * as utils from '~/utils'\nimport {} from '#import'\n\",\nJsFileSource::ts(),).unwrap()"
 ---
-import fs from 'fs';
-import path from 'path';
+import fs from 'fs'
+import path from 'path'
 
-import userEvent from '@testing-library/user-event';
-import chalk from 'chalk';
-import type { Bar, Foo } from 'foo';
-import _ from 'lodash';
-import * as R from 'remeda';
-import foo from 'src/foo';
+import userEvent from '@testing-library/user-event'
+import chalk from 'chalk'
+import type { Bar, Foo } from 'foo'
+import _ from 'lodash'
+import * as R from 'remeda'
+import foo from 'src/foo'
 
-import {  } from '#import';
-import { type bar, foo } from '@/my/module';
-import * as utils from '~/utils';
+import {  } from '#import'
+import { type bar, foo } from '@/my/module'
+import * as utils from '~/utils'
 
-import qux from '../../foo/qux';
-import foo from '../foo';
+import qux from '../../foo/qux'
+import foo from '../foo'
 
-import bar from './bar';
-import baz from './bar/baz';
+import bar from './bar'
+import baz from './bar/baz'
 
-import main from './';
+import main from './'
 
 import log = console.log
